@@ -1,6 +1,8 @@
 <?php
-require_once "./Operaciones.php";
-abstract class Numero {
+
+// Clase Numero se va a encargar de validar y normalizar los valores ingresados
+// Las reglas que debe seguir estan en el archivo "Reglas_Sist_Numerico.txt"
+class Numero {
     private string $valor;
     private string $signo;
 
@@ -8,17 +10,13 @@ abstract class Numero {
         // validar y extraer signo (si no hay, +)
 
     }
-
     public function sumar(Numero $numero){
         return Operaciones::sumar($this, $numero);
     }
-    public function getValor(){
+    public function getValor(): string{
         return $this->valor;
     }
-    public function getSigno(){
+    public function getSigno(): string{
         return $this->signo;
     }
-    abstract public function restar($string);
-    abstract public function multiplicar($string);
-    abstract public function dividir($string);
 }

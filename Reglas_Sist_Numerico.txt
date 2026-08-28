@@ -1,0 +1,24 @@
+
+REGLAS BASICAS QUE DEBE LLEVAR A CABO CADA CLASE
+
+NUMERO:
+
+1. el numero no puede estar vacio
+2. no se permiten espacios
+3. el signo es opcional
+4. si existe signo, solamente puede ser + o -
+5. el signo solamente puede estar al comienzo del numero
+6. tiene que existir al menos un numero
+7. la magnitud del numero solamente puede incluir numeros 0-9
+8. eliminamos ceros a la izquierda
+9. el cero tiene una unica representacion (ej: "-000" va a tener valor "0" y signo "+")
+10. no hay limite en la cantidad de digitos ingresados
+
+NATURAL:
+
+1. el numero no puede ser negativo (signo = "-")
+
+
+ENTERO:
+
+Por ahora, la clase Entero no valida nada, ya que toda la validacion fue realizada por la clase Numero. Cuando agreguemos numeros racionales, ahi si habra que agregar validaciones.
