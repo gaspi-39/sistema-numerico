@@ -1,14 +1,22 @@
 <?php
 class Operaciones {
     public static function sumar(Numero $a, Numero $b){
-        $carry = "0"; $resultado = ""; $auxA = $a->getValor(); $auxB = $b->getValor(); $suma = 0;    
-        if(strlen($a->getValor()) > strlen($b->getValor())){
-            $auxB = Operaciones::rellenarCeros($b, strlen($a->getValor()));
+        $carry = "0";
+        $resultado = "";
+        $auxA = $a->getValor();
+        $auxB = $b->getValor();
+        $longitudA = strlen($a->getValor());
+        $longitudB = strlen($b->getValor());
+
+        $suma = 0;    
+
+        if($longitudA > $longitudB){
+            $auxB = Operaciones::rellenarCeros($b, $longitudA);
         }
-        if(strlen($a->getValor()) < strlen($b->getValor())){
-            $auxA = Operaciones::rellenarCeros($a, strlen($b->getValor()));
+        if($longitudA < $longitudB){
+            $auxA = Operaciones::rellenarCeros($a, $longitudB);
         }
-        for ($i = max(strlen($a->getValor()), strlen($b->getValor())) - 1; $i >= 0 ; $i--) { 
+        for ($i = max($longitudA, $longitudB) - 1; $i >= 0 ; $i--) { 
             $suma = (int)$auxA[$i] + (int)$auxB[$i] + (int)$carry;
             if($suma > 9){
                 $carry = "1";
@@ -25,7 +33,7 @@ class Operaciones {
     }     
     public static function rellenarCeros(Numero $a, int $cantidad){
         $resultado = "";
-        for ($i=0; $i < $cantidad - strlen($a->getValor()); $i++) { 
+        for ($i=0; $i < $cantidad - strlen($a->getValor()); $i++) {
             $resultado .= "0";
         }
         return $resultado .= $a->getValor();
@@ -61,5 +69,47 @@ class Operaciones {
         return $resultado;
      }
      return -$resultado;
+    }
+    public static function restar(Numero $a, Numero $b){
+        $auxA = $a->getValor();
+        $auxB = $b->getValor();
+        $longitudA = strlen($a->getValor());
+        $longitudB = strlen($b->getValor());
+        $prestamo = 0;
+        $resultado = "";
+        $comparacion = Operaciones::comparar($a, $b);
+
+        if ($comparacion == -1){
+            throw new Exception("Error: No puede restar un numero mas grande que A.");
+        }
+        if($longitudA > $longitudB){
+            $auxB = Operaciones::rellenarCeros($b, strlen($a->getValor()));
+        }
+
+        for($i = $longitudA - 1; $i >= 0; $i--){
+            $digitoA = (int)$auxA[$i];
+            $digitoB = (int)$auxB[$i];
+
+            $digitoA -= $prestamo;
+
+            if($digitoA < $digitoB){
+                $digitoA += 10;
+                $prestamo = 1;
+            } else {
+                $prestamo = 0;
+            }
+            $diferencia = $digitoA - $digitoB;
+            $resultado .= (string)$diferencia;
+        }
+        $resultado = strrev($resultado);
+        $i = 0;
+        while($i < strlen($resultado) && $resultado[$i] == "0"){
+            $i++;
+        }
+        if($resultado == "0"){
+            return "0";
+        }
+        $resultado = substr($resultado, $i);
+        return $resultado;
     }
 }
