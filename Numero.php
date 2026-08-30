@@ -56,7 +56,13 @@ class Numero
     }
     public function sumar(Numero $numero)
     {
-        return Operaciones::sumar($this, $numero);
+        return Operaciones::suma($this, $numero);
+    }
+    public function restar(Numero $numero){
+        return Operaciones::resta($this, $numero);
+    }
+    public function multiplicar(Numero $numero){
+        //return Operaciones::multiplicacion($this, $numero);
     }
     public function getValor(): string
     {
