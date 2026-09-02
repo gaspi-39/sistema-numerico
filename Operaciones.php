@@ -10,14 +10,21 @@ class Operaciones {
         $longitudA = strlen($a->getValor());
         $longitudB = strlen($b->getValor());
 
-        $suma = 0;    
+        $suma = 0;
 
         if($longitudA > $longitudB){
-            $auxB = Operaciones_Auxiliares::rellenarCeros($b, $longitudA);
+            Operaciones_Auxiliares::rellenarCeros($b, $longitudA);
         }
         if($longitudA < $longitudB){
             $auxA = Operaciones_Auxiliares::rellenarCeros($a, $longitudB);
         }
+
+        if($a->getSigno() != $b->getSigno()){
+            if(Utils::compararValorAbsoluto($a, $b) == 1 && $a->getSigno() == "-" ){
+                
+            }
+        }
+
         for ($i = max($longitudA, $longitudB) - 1; $i >= 0 ; $i--) { 
             $suma = (int)$auxA[$i] + (int)$auxB[$i] + (int)$carry;
             if($suma > 9){
@@ -43,7 +50,8 @@ class Operaciones {
         $comparacion = Operaciones_Auxiliares::comparar($a, $b);
 
         if ($comparacion == -1){
-            throw new Exception("Error: No puede restar un numero mas grande que A.");
+            $resultado = "-" . Operaciones::resta($b, $a);
+            return $resultado;
         }
         if($longitudA > $longitudB){
             $auxB = Operaciones_Auxiliares::rellenarCeros($b, strlen($a->getValor()));
