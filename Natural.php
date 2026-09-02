@@ -1,6 +1,6 @@
 <?php
 
-class Natural extends Entero{
+class Natural extends Numero{
     protected string $valor;
     protected string $signo;
 
