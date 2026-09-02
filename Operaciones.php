@@ -1,6 +1,7 @@
 <?php
-require_once "./Operaciones_Auxiliares.php";
+require_once "./Utils.php";
 class Operaciones {
+
     public static function suma(Numero $a, Numero $b){
         $carry = "0";
         $resultado = "";

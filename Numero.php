@@ -2,7 +2,7 @@
 require_once "./Operaciones.php";
 // Clase Numero se va a encargar de validar y normalizar los valores ingresados
 // Las reglas que debe seguir estan en el archivo "Reglas_Sist_Numerico.txt"
-class Numero
+abstract class Numero
 {
     private string $valor;
     private string $signo;
@@ -72,4 +72,5 @@ class Numero
     {
         return $this->signo;
     }
+    abstract protected function esValido();
 }
