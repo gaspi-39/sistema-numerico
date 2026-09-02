@@ -7,10 +7,12 @@ ya que todo valor que provenga de la clase Numero, es un numero entero.
 
 */
 class Entero extends Numero{
-    protected string $valor;
-    protected string $signo;
 
     public function __construct(string $valor){
-
+        parent::__construct($valor);
     }
+    protected function esValido(){
+        return true;
+    }
+
 }
