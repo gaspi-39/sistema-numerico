@@ -6,7 +6,7 @@ ya que todo valor que provenga de la clase Numero, es un numero entero.
 (esto va a cambiar cuando agreguemos numeros racionales)
 
 */
-class Entero extends Numero{
+class Entero extends Natural{
     protected string $valor;
     protected string $signo;
 

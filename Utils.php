@@ -11,7 +11,6 @@ class Utils
     }
     public static function compararSigno(Numero $a, Numero $b)
     {
-        // retorna 1 si a > b, -1 si a < b, 0 si a = b
         $signoA = $a->getSigno();
         $signoB = $b->getSigno();
         $resultado = 0;
@@ -24,6 +23,7 @@ class Utils
     }
     public static function compararValorAbsoluto(Numero $a, Numero $b)
     {
+        // retorna 1 si a > b, -1 si a < b, 0 si a = b
         $longitudA = strlen($a->getValor());
         $longitudB = strlen($b->getValor());
         $resultado = 0;

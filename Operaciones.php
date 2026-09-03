@@ -36,7 +36,7 @@ class Operaciones
             }
             $resultado .= $signoA;
             return strrev($resultado);
-        } else{
+        } else {
             $resultadoValorAbsoluto = Utils::compararValorAbsoluto($a, $b);
             switch ($resultadoValorAbsoluto) {
                 case 1:
@@ -48,7 +48,7 @@ class Operaciones
                     $resultado .= Operaciones::resta($b, $a);
                     break;
                 default:
-                $resultado .= "+";
+                    $resultado .= "+";
                     $resultado = "0";
             }
             return $resultado;
@@ -60,33 +60,12 @@ class Operaciones
         $auxB = $b->getValor();
         $longitudA = strlen($a->getValor());
         $longitudB = strlen($b->getValor());
-        $signoA = $a->getSigno();
-        $signoB = $b->getSigno();
         $prestamo = 0;
         $resultado = "";
-        if($signoA == $signoB){
-            if($signoA == "+"){
-                $resultadoValorAbsoluto = Utils::compararValorAbsoluto($a,$b);
-                switch ($resultadoValorAbsoluto) {
-                    case 1:
-                        //llamar a resta
-                        break;
-                    case -1:
-                        # code...
-                    break;
-                    default:
-                        # code...
-                        break;
-                }
-            } else{
-                //resta y signo del num de mayor magnitud inverso
-            }
-        } else{
-            if($signoA == "+"){
-                //llamo a suma y signo = signoA
-            } else{
-                //llamo a suma y signo = signoA
-            }
+        $resultadoValorAbsoluto = Utils::compararValorAbsoluto($a, $b);
+
+        if ($resultadoValorAbsoluto == -1) {
+            throw new Exception("Error: No se puede restar un numero mas grande que A");
         }
         if ($longitudA > $longitudB) {
             $auxB = Utils::rellenarCeros($b, strlen($a->getValor()));
@@ -116,5 +95,26 @@ class Operaciones
         }
         $resultado = substr($resultado, $i);
         return $resultado;
+    }
+    public static function multiplicacion(Numero $a, Numero $b)
+    {
+        $auxB = $b->getValor();
+        $longitudB = strlen($b->getValor());
+        $resultado = new Numero("0");
+        for ($i = $longitudB - 1; $i >= 0; $i--) {
+            $digitoB = (int) $auxB[$i];
+            $resParcial = new Numero("0");
+            for ($j = 0; $j < $digitoB; $j++) {
+                $resParcial = new Numero(Operaciones::suma($resParcial, $a));
+            }
+            $cantidadCeros = $longitudB - 1 - $i;
+            $auxParcial = $resParcial->getValor();
+            for ($k = 0; $k < $cantidadCeros; $k++) {
+                $auxParcial .= "0";
+            }
+            $resParcial = new Numero($auxParcial);
+            $resultado = new Numero(Operaciones::suma($resultado, $resParcial));
+        }
+        return $resultado->getValor();
     }
 }

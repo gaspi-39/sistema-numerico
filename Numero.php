@@ -15,7 +15,7 @@ class Numero
     }
      private function validar(string $string)
     {
-        if(empty($string)){
+        if($string === ""){
             throw new Exception("Error: el numero ingresado no puede estar vacio.");
         }
         if(($string[0] == "+" || $string [0] == "-") && strlen($string) == 1){
